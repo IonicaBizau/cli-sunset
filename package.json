@@ -1,0 +1,35 @@
+{
+  "name": "cli-sunset",
+  "version": "1.0.0",
+  "description": "A fancy command line tool for knowing the sunset time.",
+  "main": "sunset",
+  "dependencies": {
+    "cli-box": "^2.1.1",
+    "couleurs": "^2.0.0",
+    "image-to-ascii": "^1.2.0",
+    "figlet": "^1.1.0",
+    "fs-extra": "^0.13.0",
+    "ipinfo": "^1.0.0",
+    "moment": "^2.8.4",
+    "prompt": "^0.2.14",
+    "suncalc": "^1.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:IonicaBizau/cli-sunset.git"
+  },
+  "keywords": [
+    "sunset",
+    "cli"
+  ],
+  "author": "Ionică Bizău <bizauionica@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IonicaBizau/cli-sunset/issues"
+  },
+  "homepage": "https://github.com/IonicaBizau/cli-sunset"
+}
