@@ -31,7 +31,7 @@ function showSunset() {
       , colored: false
     }, function (err, sun) {
 
-        var sunsetDate = Moment(SunCalc.getTimes(new Date(), Config.lat, Config.lng).sunset).format("hh:mm, d MMMM YYYY");
+        var sunsetDate = Moment(SunCalc.getTimes(new Date(), Config.lat, Config.lng).sunset).format("hh:mm, D MMMM YYYY");
 
         // ASCII art
         Figlet.text(sunsetDate, function (err, text) {
