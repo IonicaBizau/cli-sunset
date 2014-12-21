@@ -1,8 +1,9 @@
 {
   "name": "cli-sunset",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "A fancy command line tool for knowing the sunset time.",
   "main": "sunset",
+  "bin": "sunset",
   "dependencies": {
     "cli-box": "^2.1.1",
     "couleurs": "^2.0.0",
