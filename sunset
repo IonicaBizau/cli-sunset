@@ -9,6 +9,7 @@ var SunCalc = require("suncalc")
   , Couleurs = require("couleurs")()
   , Prompt = require("prompt")
   , IpInfo = require("ipinfo")
+  , FsExtra = require("fs-extra")
   , Config = null
   ;
 
@@ -65,6 +66,10 @@ function showSunset() {
 // Require home config
 try {
     Config = require(CONFIG_FILE);
+    if (!Config.lat || !Config.lng) {
+        throw new Error("Missing lat or lng.");
+    }
+    showSunset();
 } catch (e) {
     IpInfo("loc", function (err, loc) {
         if (err) { throw err; }
@@ -80,7 +85,13 @@ try {
             }
         }, function (err, result) {
             if (err) { return callback(err); }
-            console.log(result);
+            var location = result.location.trim().split(/[ ,]+/);
+            Config = {
+                lat: location[0]
+              , lng: location[1]
+            };
+            FsExtra.writeJson(CONFIG_FILE, Config);
+            showSunset();
         });
     });
 }
