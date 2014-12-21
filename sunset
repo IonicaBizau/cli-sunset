@@ -7,50 +7,80 @@ var SunCalc = require("suncalc")
   , Moment = require("moment")
   , Figlet = require("figlet")
   , Couleurs = require("couleurs")()
+  , Prompt = require("prompt")
+  , IpInfo = require("ipinfo")
+  , Config = null
   ;
 
 // Constants
-const HOME_DIRECTORY = process.env[
-    process.platform == "win32" ? "USERPROFILE" : "HOME"
-];
+const HOME_DIRECTORY = process.env[process.platform == "win32" ? "USERPROFILE" : "HOME"]
+    , CONFIG_FILE = HOME_DIRECTORY + "/.sunset.json"
+    ;
+
+Prompt.start();
+Prompt.message = "";
+Prompt.delimiter = "";
+Prompt.colors = false;
+
+function showSunset() {
+    // Convert image to text
+    ImageToAscii({
+        path: "./resources/sun.png"
+      , pixels: " @ "
+      , colored: false
+    }, function (err, sun) {
+
+        var sunsetDate = Moment(SunCalc.getTimes(new Date(), Config.lat, Config.lng).sunset).format("hh:mm, d MMMM YYYY");
+
+        // ASCII art
+        Figlet.text(sunsetDate, function (err, text) {
+            console.log(
+                new CliBox({
+                    w: 0
+                  , h: 0
+                  , marks: {
+                        nw: "╔"
+                      , n:  "═"
+                      , ne: "╗"
+                      , e:  "║"
+                      , se: "╝"
+                      , s:  "═"
+                      , sw: "╚"
+                      , w:  "║"
+                      , b: " "
+                    }
+                }, {
+                    text: sun.replace(/\u001b\[0m/g, "").trimRight() + "\n\n\n" + text.split("\n").map(function (c) {
+                        return Couleurs.fg(c, "#ecf0f1");
+                    }).join("\n")
+                  , hAlign: "center"
+                  , stretch: true
+                  , autoEOL: true
+                }).toString()
+            );
+        });
+    });
+}
 
 // Require home config
-var Config = require(HOME_DIRECTORY + "/.sunset.json");
-
-// Convert image to text
-ImageToAscii({
-    path: "./resources/sun.png"
-  , pixels: " @ "
-  , colored: false
-}, function (err, sun) {
-
-    var sunsetDate = Moment(SunCalc.getTimes(new Date(), Config.lat, Config.lng).sunset).format("hh:mm, d MMMM YYYY");
-
-    // ASCII art
-    Figlet.text(sunsetDate, function (err, text) {
-        console.log(
-            new CliBox({
-                w: 0
-              , h: 0
-              , marks: {
-                    nw: "╔"
-                  , n:  "═"
-                  , ne: "╗"
-                  , e:  "║"
-                  , se: "╝"
-                  , s:  "═"
-                  , sw: "╚"
-                  , w:  "║"
-                  , b: " "
+try {
+    Config = require(CONFIG_FILE);
+} catch (e) {
+    IpInfo("loc", function (err, loc) {
+        if (err) { throw err; }
+        loc = loc.trim();
+        Prompt.get({
+            properties: {
+                location: {
+                    required: true
+                  , message: "Invalid location."
+                  , description: "Your location:"
+                  , default: loc
                 }
-            }, {
-                text: sun.replace(/\u001b\[0m/g, "").trimRight() + "\n\n\n" + text.split("\n").map(function (c) {
-                    return Couleurs.fg(c, "#ecf0f1");
-                }).join("\n")
-              , hAlign: "center"
-              , stretch: true
-              , autoEOL: true
-            }).toString()
-        );
+            }
+        }, function (err, result) {
+            if (err) { return callback(err); }
+            console.log(result);
+        });
     });
-});
+}
