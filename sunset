@@ -79,12 +79,12 @@ try {
                 location: {
                     required: true
                   , message: "Invalid location."
-                  , description: "Your location:"
+                  , description: "Your location (lat,lng):"
                   , default: loc
                 }
             }
         }, function (err, result) {
-            if (err) { return callback(err); }
+            if (err) { throw err; }
             var location = result.location.trim().split(/[ ,]+/);
             Config = {
                 lat: location[0]
