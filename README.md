@@ -9,6 +9,9 @@ Install `graphicsmagick` if you didn't do this already:
 ```sh
 $ sudo apt-get install graphicsmagick
 $ brew install graphicsmagick
+
+# Chocolatey (package manger for Windows)
+$ choco install graphicsmagick
 ```
 
 Then install this library:
