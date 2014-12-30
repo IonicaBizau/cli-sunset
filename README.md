@@ -10,7 +10,8 @@ Install `graphicsmagick` if you didn't do this already:
 $ sudo apt-get install graphicsmagick
 $ brew install graphicsmagick
 
-# Chocolatey (package manger for Windows)
+# Chocolatey (package manager for Windows)
+# (Restart of cmd/PowerShell is required)
 $ choco install graphicsmagick
 ```
 
