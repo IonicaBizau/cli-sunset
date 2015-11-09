@@ -13,6 +13,11 @@ var SunCalc = require("suncalc")
   , Config = null
   ;
 
+// Help output
+if (~process.argv.indexOf("-h") || ~process.argv.indexOf("--help")) {
+    return console.log("Usage: sunset");
+}
+
 // Constants
 const HOME_DIRECTORY = process.env[process.platform == "win32" ? "USERPROFILE" : "HOME"]
     , CONFIG_FILE = HOME_DIRECTORY + "/.sunset.json"

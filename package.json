@@ -1,6 +1,6 @@
 {
   "name": "cli-sunset",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "A fancy command line tool for knowing the sunset time.",
   "main": "sunset",
   "bin": {
@@ -29,10 +29,42 @@
     "sunset",
     "cli"
   ],
-  "author": "Ionică Bizău <bizauionica@gmail.com>",
-  "license": "MIT",
+  "author": "Ionică Bizău <bizauionica@gmail.com> (http://ionicabizau.net)",
+  "license": "KINDLY",
   "bugs": {
     "url": "https://github.com/IonicaBizau/cli-sunset/issues"
   },
-  "homepage": "https://github.com/IonicaBizau/cli-sunset"
+  "homepage": "https://github.com/IonicaBizau/cli-sunset",
+  "blah": {
+    "show_docs": false,
+    "installation": [
+      {
+        "p": "Also, you will need to install `graphicsmagick`:"
+      },
+      {
+        "code": {
+          "language": "sh",
+          "content": [
+            "$ sudo apt-get install graphicsmagick",
+            "$ brew install graphicsmagick",
+            "",
+            "# Chocolatey (package manager for Windows)",
+            "# (Restart of cmd/PowerShell is required)",
+            "$ choco install graphicsmagick"
+          ]
+        }
+      },
+      {
+        "h2": "Usage"
+      },
+      {
+        "p": "Run `sunset` command and you will see a fancy result:"
+      },
+      {
+        "img": {
+          "source": "/demo/1.png"
+        }
+      }
+    ]
+  }
 }
