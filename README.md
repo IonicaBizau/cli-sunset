@@ -5,7 +5,7 @@ A fancy command line tool for knowing the sunset time.
 ## Installation
 
 ```sh
-$ npm i -g cli-sunset
+$ npm i cli-sunset
 ```
 
 Also, you will need to install `graphicsmagick`:
