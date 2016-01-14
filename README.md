@@ -1,6 +1,6 @@
-# cli-sunset [![Support this project][donate-now]][paypal-donations]
+# cli-sunset [![PayPal](https://img.shields.io/badge/%24-paypal-f39c12.svg)][paypal-donations] [![Version](https://img.shields.io/npm/v/cli-sunset.svg)](https://www.npmjs.com/package/cli-sunset) [![Downloads](https://img.shields.io/npm/dt/cli-sunset.svg)](https://www.npmjs.com/package/cli-sunset) [![Get help on Codementor](https://cdn.codementor.io/badges/get_help_github.svg)](https://www.codementor.io/johnnyb?utm_source=github&utm_medium=button&utm_term=johnnyb&utm_campaign=github)
 
-A fancy command line tool for knowing the sunset time.
+> A fancy command line tool for knowing the sunset time.
 
 ## Installation
 
