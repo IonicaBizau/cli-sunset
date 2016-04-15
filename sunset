@@ -1,102 +1,89 @@
 #!/usr/bin/env node
 
+"use strict";
+
 // Dependencies
-var SunCalc = require("suncalc")
-  , CliBox = require("cli-box")
-  , ImageToAscii = require("image-to-ascii")
-  , Moment = require("moment")
-  , Figlet = require("figlet")
-  , Couleurs = require("couleurs")()
-  , Prompt = require("prompt")
-  , IpInfo = require("ipinfo")
-  , FsExtra = require("fs-extra")
-  , Config = null
-  ;
-
-// Help output
-if (~process.argv.indexOf("-h") || ~process.argv.indexOf("--help")) {
-    return console.log("Usage: sunset");
-}
-
-// Constants
-const HOME_DIRECTORY = process.env[process.platform == "win32" ? "USERPROFILE" : "HOME"]
-    , CONFIG_FILE = HOME_DIRECTORY + "/.sunset.json"
+const SunCalc = require("suncalc")
+    , Daty = require("daty")
+    , Prompt = require("prompt")
+    , IpInfo = require("ipinfo")
+    , rJson = require("r-json")
+    , wJson = require("w-json")
+    , splitByComma = require("split-by-comma")
+    , couleurs = require("couleurs")
+    , abs = require("abs")
+    , Tilda = require("tilda")
     ;
 
-Prompt.start();
-Prompt.message = "";
-Prompt.delimiter = "";
-Prompt.colors = false;
+let config = null;
 
-function showSunset() {
-    // Convert image to text
-    ImageToAscii({
-        path: __dirname + "/resources/sun.png"
-      , pixels: " @ "
-      , colored: false
-    }, function (err, sun) {
+// Constants
+const CONFIG_FILE = abs("~/.sunset.json");
 
-        var sunsetDate = Moment(SunCalc.getTimes(new Date(), Config.lat, Config.lng).sunset).format("hh:mm, D MMMM YYYY");
+new Tilda(`${__dirname}/package.json`).main(action => {
 
-        // ASCII art
-        Figlet.text(sunsetDate, function (err, text) {
-            console.log(
-                new CliBox({
-                    w: 0
-                  , h: 0
-                  , marks: {
-                        nw: "╔"
-                      , n:  "═"
-                      , ne: "╗"
-                      , e:  "║"
-                      , se: "╝"
-                      , s:  "═"
-                      , sw: "╚"
-                      , w:  "║"
-                      , b: " "
-                    }
-                }, {
-                    text: sun.replace(/\u001b\[0m/g, "").trimRight() + "\n\n\n" + text.split("\n").map(function (c) {
-                        return Couleurs.fg(c, "#ecf0f1");
-                    }).join("\n")
-                  , hAlign: "center"
-                  , stretch: true
-                  , autoEOL: true
-                }).toString()
-            );
-        });
-    });
-}
+    Prompt.start();
+    Prompt.message = "";
+    Prompt.delimiter = "";
+    Prompt.colors = false;
 
-// Require home config
-try {
-    Config = require(CONFIG_FILE);
-    if (!Config.lat || !Config.lng) {
-        throw new Error("Missing lat or lng.");
+    function showSunset() {
+        // Convert image to text
+        let sunsetDate = new Daty(SunCalc.getTimes(new Date(), config.lat, config.lng).sunset)
+          , sunsetStr = couleurs.bold(sunsetDate.format("hh:mm A"))
+          ;
+
+        // Thanks! :) http://chris.com/ascii/index.php?art=nature/sunset
+        console.log(`
+                Sunset time today:
+                     ${sunsetStr}
+
+                    ,     :     ,
+              '.    ;    :    ;    ,\`
+          '-.   '.   ;   :   ;   ,\`   ,-\`
+       "-.   '-.  '.  ;  :  ;  ,\`  ,-\`   ,-"
+          "-.   '-. '. ; : ; ,\` ,-\`   ,-"
+     '"--.   '"-.  '-.'  '  \`.-\`  ,-"\`   ,--"\`
+          '"--.  '"-.   ...   ,-"\`  ,--"\`
+               '"--.  .:::::.  ,--"\`
+    ------------------:::::::------------------
+                       ~~~~~
+                        ~~~
+                         ~
+        `);
     }
-    showSunset();
-} catch (e) {
-    IpInfo("loc", function (err, loc) {
-        if (err) { throw err; }
-        loc = loc.trim();
-        Prompt.get({
-            properties: {
-                location: {
-                    required: true
-                  , message: "Invalid location."
-                  , description: "Your location (lat,lng):"
-                  , default: loc
-                }
-            }
-        }, function (err, result) {
+
+    // Require home config
+    try {
+        config = require(CONFIG_FILE);
+        if (!config.lat || !config.lng) {
+            throw new Error("Missing lat or lng.");
+        }
+        showSunset();
+    } catch (e) {
+        IpInfo("loc", function (err, loc) {
             if (err) { throw err; }
-            var location = result.location.trim().split(/[ ,]+/);
-            Config = {
-                lat: location[0]
-              , lng: location[1]
-            };
-            FsExtra.writeJson(CONFIG_FILE, Config);
-            showSunset();
+            loc = loc.trim();
+            Prompt.get({
+                properties: {
+                    location: {
+                        required: true
+                      , message: "Invalid location."
+                      , description: "Your location (lat,lng):"
+                      , default: loc
+                    }
+                }
+            }, function (err, result) {
+                if (err) { throw err; }
+                let location = splitByComma(result.location.trim());
+                config = {
+                    lat: location[0]
+                  , lng: location[1]
+                };
+                wJson(CONFIG_FILE, config);
+                showSunset();
+            });
         });
-    });
-}
+    }
+});
+
