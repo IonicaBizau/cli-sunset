@@ -1,39 +1,39 @@
-# cli-sunset [![PayPal](https://img.shields.io/badge/%24-paypal-f39c12.svg)][paypal-donations] [![Version](https://img.shields.io/npm/v/cli-sunset.svg)](https://www.npmjs.com/package/cli-sunset) [![Downloads](https://img.shields.io/npm/dt/cli-sunset.svg)](https://www.npmjs.com/package/cli-sunset) [![Get help on Codementor](https://cdn.codementor.io/badges/get_help_github.svg)](https://www.codementor.io/johnnyb?utm_source=github&utm_medium=button&utm_term=johnnyb&utm_campaign=github)
+# `$ cli-sunset` [![PayPal](https://img.shields.io/badge/%24-paypal-f39c12.svg)][paypal-donations] [![Version](https://img.shields.io/npm/v/cli-sunset.svg)](https://www.npmjs.com/package/cli-sunset) [![Downloads](https://img.shields.io/npm/dt/cli-sunset.svg)](https://www.npmjs.com/package/cli-sunset) [![Get help on Codementor](https://cdn.codementor.io/badges/get_help_github.svg)](https://www.codementor.io/johnnyb?utm_source=github&utm_medium=button&utm_term=johnnyb&utm_campaign=github)
 
 > A fancy command line tool for knowing the sunset time.
 
-## Installation
+## :cloud: Installation
+    
+You can install the package globally and use it as command line tool:
 
 ```sh
-$ npm i --save cli-sunset
+$ npm i -g cli-sunset
 ```
+    
 
-Also, you will need to install `graphicsmagick`:
+Then, run `sunset --help` and see what the CLI tool can do.
 
-```sh
-$ sudo apt-get install graphicsmagick
-$ brew install graphicsmagick
-
-# Chocolatey (package manager for Windows)
-# (Restart of cmd/PowerShell is required)
-$ choco install graphicsmagick
+    
 ```
-## Usage
+$ sunset --help
+Usage: sunset [options]
 
-Run `sunset` command and you will see a fancy result:
+A fancy command line tool for knowing the sunset time.
 
-![](/demo/1.png)
-
-## How to contribute
+Options:
+  -v, --version  Displays version information.
+  -h, --help     Displays this help.          
+                                              
+Documentation can be found at https://github.com/IonicaBizau/cli-sunset.
+```
+    
+## :yum: How to contribute
 Have an idea? Found a bug? See [how to contribute][contributing].
 
-## Where is this library used?
-If you are using this library in one of your projects, add it in this list. :sparkles:
-
-## License
-
+## :scroll: License
+    
 [MIT][license] © [Ionică Bizău][website]
-
+    
 [paypal-donations]: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RVXDDLKKLQRJW
 [donate-now]: http://i.imgur.com/6cMbHOC.png
 
