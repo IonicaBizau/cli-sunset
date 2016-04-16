@@ -20,7 +20,12 @@ let config = null;
 // Constants
 const CONFIG_FILE = abs("~/.sunset.json");
 
-new Tilda(`${__dirname}/package.json`).main(action => {
+new Tilda(`${__dirname}/package.json`, {
+    options: {
+        opts: ["raw", "r"]
+      , desc: "Show only the sunset time in the output, ignoring the ASCII art image."
+    }
+}).main(action => {
 
     Prompt.start();
     Prompt.message = "";
@@ -30,15 +35,21 @@ new Tilda(`${__dirname}/package.json`).main(action => {
     function showSunset() {
         // Convert image to text
         let sunsetDate = new Daty(SunCalc.getTimes(new Date(), config.lat, config.lng).sunset)
-          , sunsetStr = couleurs.bold(sunsetDate.format("hh:mm A"))
+          , sunsetStr = sunsetDate.format("hh:mm A")
           ;
+
+        if (action.options.raw.is_provided) {
+            return action.exit(sunsetStr);
+        }
+
+        sunsetStr = couleurs.bold(sunsetDate.format("hh:mm A"));
 
         // Thanks! :) http://chris.com/ascii/index.php?art=nature/sunset
         console.log(`
                 Sunset time today:
                      ${sunsetStr}
 
-                    ,     :     ,
+                    ,    :     ,
               '.    ;    :    ;    ,\`
           '-.   '.   ;   :   ;   ,\`   ,-\`
        "-.   '-.  '.  ;  :  ;  ,\`  ,-\`   ,-"
@@ -86,4 +97,3 @@ new Tilda(`${__dirname}/package.json`).main(action => {
         });
     }
 });
-
