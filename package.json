@@ -4,7 +4,7 @@
   "description": "A fancy command line tool for knowing the sunset time.",
   "main": "sunset",
   "bin": {
-    "sunset": "sunset"
+    "sunset": "./cli.js"
   },
   "dependencies": {
     "abs": "^1.2.1",
