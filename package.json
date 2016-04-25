@@ -1,8 +1,8 @@
 {
   "name": "cli-sunset",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "A fancy command line tool for knowing the sunset time.",
-  "main": "sunset",
+  "main": "cli.js",
   "bin": {
     "sunset": "./cli.js"
   },
@@ -35,5 +35,12 @@
   "bugs": {
     "url": "https://github.com/IonicaBizau/cli-sunset/issues"
   },
-  "homepage": "https://github.com/IonicaBizau/cli-sunset"
+  "homepage": "https://github.com/IonicaBizau/cli-sunset",
+  "files": [
+    "bin/",
+    "lib/",
+    "dist/",
+    "src/",
+    "cli.js"
+  ]
 }
