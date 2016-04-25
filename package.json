@@ -38,9 +38,13 @@
   "homepage": "https://github.com/IonicaBizau/cli-sunset",
   "files": [
     "bin/",
+    "app/",
     "lib/",
     "dist/",
     "src/",
-    "cli.js"
+    "resources/",
+    "menu/",
+    "cli.js",
+    "index.js"
   ]
 }
