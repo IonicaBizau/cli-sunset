@@ -1,6 +1,6 @@
 {
   "name": "cli-sunset",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "A fancy command line tool for knowing the sunset time.",
   "main": "cli.js",
   "bin": {
