@@ -1,6 +1,6 @@
 {
   "name": "cli-sunset",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "description": "A fancy command line tool for knowing the sunset time.",
   "main": "cli.js",
   "bin": {
@@ -30,7 +30,7 @@
     "sunset",
     "cli"
   ],
-  "author": "Ionică Bizău <bizauionica@gmail.com> (http://ionicabizau.net)",
+  "author": "Ionică Bizău <bizauionica@gmail.com> (https://ionicabizau.net)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/IonicaBizau/cli-sunset/issues"
@@ -40,12 +40,11 @@
     "bin/",
     "app/",
     "lib/",
-    "build/",
     "dist/",
     "src/",
+    "scripts/",
     "resources/",
     "menu/",
-    "scripts/",
     "cli.js",
     "index.js"
   ]
