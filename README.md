@@ -13,7 +13,11 @@ You can install the package globally and use it as command line tool:
 
 
 ```sh
-$ npm i -g cli-sunset
+# Using npm
+npm install --global cli-sunset
+
+# Using yarn
+yarn global add cli-sunset
 ```
 
 
